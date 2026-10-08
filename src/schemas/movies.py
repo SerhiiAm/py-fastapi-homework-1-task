@@ -30,4 +30,3 @@ class MovieListResponseSchema(BaseModel):
     total_items: int
 
     model_config = ConfigDict(from_attributes=True)
-

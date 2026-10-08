@@ -48,7 +48,9 @@ async def get_movies(
     )
 
     return MovieListResponseSchema(
-        movies=[MovieDetailResponseSchema.model_validate(m) for m in movies],
+        movies=[
+            MovieDetailResponseSchema.model_validate(m) for m in movies
+        ],
         prev_page=prev_page,
         next_page=next_page,
         total_pages=total_pages,
@@ -61,7 +63,9 @@ async def get_movie_by_id(
     movie_id: int,
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(select(MovieModel).where(MovieModel.id == movie_id))
+    result = await db.execute(
+        select(MovieModel).where(MovieModel.id == movie_id)
+    )
     movie = result.scalar_one_or_none()
 
     if movie is None:
